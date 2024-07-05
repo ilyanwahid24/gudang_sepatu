@@ -33,7 +33,7 @@
 				<p class="login-box-msg">Sign in</p>
 				<?= $this->session->flashdata('message'); ?>
 
-				<form action="<?= base_url('Auth/proses') ?>" method="post">
+				<form action="<?= base_url('auth/proses') ?>" method="post">
 					<div class="input-group mb-3">
 						<input type="text" class="form-control" placeholder="Username" name="username">
 						<div class="input-group-append">

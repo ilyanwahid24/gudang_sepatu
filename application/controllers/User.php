@@ -20,28 +20,21 @@ class User extends CI_Controller
 
     function tambah()
     {
-        $this->form_validation->set_rules('username', 'Username', 'required|is_unique[user.id]');
-        if ($this->form_validation->run() == false) {
-            $this->db->insert(
-                'user',
-                [
-                    'username' => $this->input->post('username'),
-                    'password' => $this->input->post('password'),
-                    'nama' => $this->input->post('nama'),
-                    'address' => $this->input->post('address'),
-                    'level' => $this->input->post('level'),
-                ]
-            );
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            User berhasil ditambah</div>');
-        } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-                    User sudah ada</div>');
-            redirect('user/index');
-
+        $this->db->insert(
+            'user',
+            [
+                'username' => $this->input->post('username'),
+                'password' => $this->input->post('password'),
+                'nama' => $this->input->post('nama'),
+                'address' => $this->input->post('address'),
+                'level' => $this->input->post('level'),
+            ]
+        );
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+                User berhasil ditambah</div>');
         redirect('user/index');
     }
-}
+
 
     function hapus($id)
     {
@@ -58,7 +51,7 @@ class User extends CI_Controller
         $this->load->model('user_M');
         $data['edit_user'] = $this->user_M->getId($id);
 
-        $this->form_validation->set_rules('username', 'Username', 'required|is_unique[user.username]');
+        $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('address', 'Address', 'required');

@@ -100,41 +100,48 @@ class Stock extends CI_Controller
 
     public function pdf()
     {
-        $pdf = new \TCPDF();
-        $pdf->AddPage('L', 'mm', 'A4');
-        $pdf->SetFont('', 'B', 14);
-        $pdf->Cell(277, 10, "LAPORAN STOK MASUK", 0, 1, 'C');
-        $pdf->SetAutoPageBreak(true, 0);
-
-        // Add Header
-        $pdf->Ln(10);
-        $pdf->SetFont('', 'B', 12);
-        $pdf->Cell(20, 8, "No", 1, 0, 'C');
-        $pdf->Cell(20, 8, "Barcode", 1, 0, 'C');
-        $pdf->Cell(50, 8, "Product Item", 1, 0, 'C');
-        $pdf->Cell(20, 8, "Qty", 1, 0, 'C');
-        $pdf->Cell(70, 8, "Detail", 1, 0, 'C');
-        $pdf->Cell(37, 8, "Date", 1, 1, 'C');
-
-
-        $pdf->SetFont('', '', 12);
         $data['stock'] = $this->stock_m->get()->result();
         $data['item'] = $this->item_m->get()->result();
         $data['supplier'] = $this->supplier_m->get()->result();
-        $no = 0;
-        foreach ($data['stock'] as $lapData) {
-            $no++;
-            $pdf->Cell(20, 8, $no, 1, 0, 'C');
-            $pdf->Cell(20, 8, $lapData->barcode, 1, 0);
-            $pdf->Cell(50, 8, $lapData->item_name, 1, 0);
-            $pdf->Cell(20, 8, $lapData->qty, 1, 0);
-            $pdf->Cell(70, 8, $lapData->detail, 1, 0);
-            $pdf->Cell(37, 8, $lapData->date, 1, 1);
-        }
 
-        $pdf->SetFont('', 'B', 10);
-        $pdf->Cell(277, 10, "Laporan Stok Masuk Gudang Sepatu", 0, 1, 'L');
+        $this->template->load('templates/index', 'transaction/stock_in/laporan_pdf', $data);
 
-        $pdf->Output('Laporan-Stok-Masuk-Gudang-Sepatu.pdf');
+        // $pdf = new \TCPDF();
+        // $pdf->AddPage('L', 'mm', 'A4');
+        // $pdf->SetFont('', 'B', 14);
+        // $pdf->Cell(277, 10, "LAPORAN STOK MASUK", 0, 1, 'C');
+        // $pdf->SetAutoPageBreak(true, 0);
+
+        // // Add Header
+        // $pdf->Ln(10);
+        // $pdf->SetFont('', 'B', 12);
+        // $pdf->Cell(20, 8, "No", 1, 0, 'C');
+        // $pdf->Cell(20, 8, "Barcode", 1, 0, 'C');
+        // $pdf->Cell(50, 8, "Product Item", 1, 0, 'C');
+        // $pdf->Cell(20, 8, "Qty", 1, 0, 'C');
+        // $pdf->Cell(70, 8, "Detail", 1, 0, 'C');
+        // $pdf->Cell(37, 8, "Date", 1, 1, 'C');
+
+
+        // $pdf->SetFont('', '', 12);
+        // $data['stock'] = $this->stock_m->get()->result();
+        // $data['item'] = $this->item_m->get()->result();
+        // $data['supplier'] = $this->supplier_m->get()->result();
+        // $no = 0;
+        // foreach ($data['stock'] as $lapData) {
+        //     $no++;
+        //     $pdf->Cell(20, 8, $no, 1, 0, 'C');
+        //     $pdf->Cell(20, 8, $lapData->barcode, 1, 0);
+        //     $pdf->Cell(50, 8, $lapData->item_name, 1, 0);
+        //     $pdf->Cell(20, 8, $lapData->qty, 1, 0);
+        //     $pdf->Cell(70, 8, $lapData->detail, 1, 0);
+        //     $pdf->Cell(37, 8, $lapData->date, 1, 1);
+        // }
+
+        // $pdf->SetFont('', 'B', 10);
+        // $pdf->Cell(277, 10, "Laporan Stok Masuk Gudang Sepatu", 0, 1, 'L');
+
+        // $pdf->Output('Laporan-Stok-Masuk-Gudang-Sepatu.pdf');
+
     }
 }

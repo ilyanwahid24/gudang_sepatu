@@ -47,7 +47,7 @@
                                               Export
                                           </button>
                                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                              <a class="dropdown-item" href="<?= base_url('Stock/pdf'); ?>">PDF</a>
+                                              <a class="dropdown-item" href="<?= base_url('Pdfview'); ?>">PDF</a>
                                               <a class="dropdown-item" href="<?= base_url('Stock/excel'); ?>">EXEL</a>
                                           </div>
                                       </div>
